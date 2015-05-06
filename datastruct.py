@@ -1,6 +1,8 @@
+
+
+# imprt utils is at the bottom of the file because ther is a loop in the importing
+
 __author__ = 'dido-ubuntu'
-
-
 
 ############################################################################################################
 ####################################### TRIE DATA STRUCTURE ################################
@@ -18,32 +20,86 @@ class Trie():
     build with the naming procedure.
 
     """
-    def __init__(self, sigma, dictNaming):
+    def __init__(self, sigma):
         self.sigma = sigma
         self.root = TrieNode(sigma)
-        self.dictNaming = dictNaming
 
 
+    def insert(self, newString ):
+        self.dictNaming = utils.naming([newString])
+        tempNode = self.root
+        msdigit = 0
+        self._insertRic(tempNode, newString, msdigit)
 
-    def insert(self, string ):
-        #tempNode = self.root
-        self._insertLevel(self.root, string, 0)
+    def _insertRic(self, node, newString, msdigit):
 
-    def _insertLevel(self, node, string, level):
+        iDigitStr = self.dictNaming[newString[msdigit]] # number associated with n-th most significant digit
+        item = node.array[iDigitStr]
+        if isinstance(item , None):
+            # insert the string because there is no other string
+            node.array[iDigitStr] = newString
+            return
+        elif isinstance(item, str):
+            # collision
+            oldString = item
+            newNode = TrieNode()
+            node.array[iDigitStr] = newNode
+            msdigit = msdigit + 1
+            self._updateLevel(newNode, newString, msdigit, oldString)
 
-        if(string[level])
+        elif isinstance(item, TrieNode):
+            #ricorsion in the childnode = item
+            msdigit = msdigit + 1
+            #if(len(newString) <= levelChar):
+            self._insertRic(item, newString, msdigit)
+            #else:
 
 
-
-    def _updateLevel(self,tempNode, listStrings, posChar):
+    def _updateLevel(self, node, newString, msdigit, oldString):
         """
         Insert the strings on a level node with the position
+
         """
-        for string in listStrings:
-                posSigma = self.dictStringInt[string[posChar]]
-                self.tempNode.array[posSigma].append(string)
+        self._insertRic(node, newString, msdigit)
+        self._insertRic(node, oldString, msdigit)
+
+"""
+    def __str__(self):
+        if self.root == [None for i in xrange(self.sigma)]:return '<empty tree>'
+        def recurse(node):
+            if node == [None for i in xrange(self.sigma)]: return [], 0, 0
+            label = "nodo" #str(node.key)
+            left_lines, left_pos, left_width = recurse(node.left)
+            right_lines, right_pos, right_width = recurse(node.right)
+            middle = max(right_pos + left_width - left_pos + 1, len(label), 2)
+            pos = left_pos + middle // 2
+            width = left_pos + middle + right_width - right_pos
+            while len(left_lines) < len(right_lines):
+                left_lines.append(' ' * left_width)
+            while len(right_lines) < len(left_lines):
+                right_lines.append(' ' * right_width)
+            if (middle - len(label)) % 2 == 1 and node.parent is not None and \
+               node is node.parent.left and len(label) < middle:
+                label += '.'
+            label = label.center(middle, '.')
+            if label[0] == '.': label = ' ' + label[1:]
+            if label[-1] == '.': label = label[:-1] + ' '
+            lines = [' ' * left_pos + label + ' ' * (right_width - right_pos),
+                     ' ' * left_pos + '/' + ' ' * (middle-2) +
+                     '\\' + ' ' * (right_width - right_pos)] + \
+              [left_line + ' ' * (width - left_width - right_width) +
+               right_line
+               for left_line, right_line in zip(left_lines, right_lines)]
+            return lines, pos, width
+        return '\n'.join(recurse(self.root) [0])
+
+"""
 
 
+trie = Trie(10)
+Trie.insert("abc")
+Trie.insert("abd")
+Trie.insert("bad")
 
 
 
@@ -56,8 +112,8 @@ class TrieNode():
 
     def __init__(self, sigma):
         self.sigma = sigma
-        self.array = [ [] for i in xrange(sigma)] # array[i] = [] or Pointer to another node or String
-        self.parent = None
+        self.array = [ [None] for i in xrange(sigma)] # array[i] = [None] or Pointer to another TrieNode or String
+        self.parent = NoneTrie.insert("abc")
 
 
 ############################################################################################################
@@ -65,7 +121,7 @@ class TrieNode():
 ############################################################################################################
 
 
-class BST(object):
+class BST( ):
     """
     Simple binary search tree implementation.
     This BST supports insert, find, and delete-min operations.
@@ -221,3 +277,5 @@ def test(args=None, BSTtype=BST):
     print tree.inOrderVisit()
 
 #if __name__ == '__main__': test()
+
+import utils   ## because utils import datastruct, there is a cycle
