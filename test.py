@@ -1,8 +1,6 @@
 
-from SortingAtomic import SnowPlow
-from SortingAtomic import MergeSort
-from SortingAtomic import _threePartition
-from SortingAtomic import QuickSort
+from  SortingAtomic import distrBased, mergeBased
+from SortingStrings import multikeyQuicksort, radixSort
 import unittest
 
 
@@ -23,7 +21,7 @@ class testSortingAtomic(unittest.TestCase):
     def test_threePartition(self):
         s  =[9,8,7,6,5,4,3,2,1]
         #s = [1,2,3,4,5,6,7,9]
-        indexes = _threePartition(s,0,len(s)-1)
+        indexes = distrBased._threePartition(s,0,len(s)-1)
         l = indexes[0]
         r = indexes[1]
         p = s[l]
@@ -39,14 +37,14 @@ class testSortingAtomic(unittest.TestCase):
         s = [9,8,7,6,5,4,3,2,1,0]
         test = s[:]
         test.sort()
-        QuickSort( s , 0 , len(s)-1)
+        distrBased.QuickSort( s , 0 , len(s)-1)
         self.assertEqual( s , test )
 
     def test_mergeSort(self):
         s = [9,8,7,6]
         test = s[:]
         test.sort()
-        MergeSort( s, 1, len(s) )
+        mergeBased.mergesort( s )
         self.assertEqual( s , test )
 
 

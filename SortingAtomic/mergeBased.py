@@ -15,12 +15,12 @@ def mergesort(list):
     if len(list)<=1:
         return list
     middle=len(list)/2
-    left =list[:middle]
+    left = list[:middle]
     right=list[middle:]
     left=mergesort(left)
     right=mergesort(right)
     res=merge(left,right)
-    print res
+    print (res)
     return res
 
 
@@ -59,7 +59,7 @@ class SnowPlow():
         for i in range(self.sizeM):
             u.append(s.pop(0))
         self._snowPlowPhase(u)
-        print self._merge( self.outRuns[0],self.outRuns[1])
+        print (self._merge( self.outRuns[0],self.outRuns[1]))
 
     def _merge(self , a , b ):
         """
