@@ -1,16 +1,11 @@
-<<<<<<< HEAD
 #pycharm directory
 .idea
+
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
-*$py.class
-=======
-# Byte-compiled / optimized / DLL files
-__pycache__/
-*.py[cod]
->>>>>>> 664034eda1771804ec58759f084d8c492db678d2
+
 
 # C extensions
 *.so
@@ -18,10 +13,7 @@ __pycache__/
 # Distribution / packaging
 .Python
 env/
-<<<<<<< HEAD
 venv/
-=======
->>>>>>> 664034eda1771804ec58759f084d8c492db678d2
 build/
 develop-eggs/
 dist/
