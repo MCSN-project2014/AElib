@@ -3,5 +3,10 @@
 
 Libraries written in python from the note of the Algorithm engeneering course.
 
-Every packages correspond to a chapter of the notes of the professor. In each pachage there are several modules in which contain the impelementation of the algorithms.
+`aelib` directory contains the packages corresponding to a chapter of the notes of the professor.
+In each pachage there are several modules, each of them contains algorithms implementaion.
+
+`doc` folder contains the documentation of the libraries
+
+`test` folder contains the test for each modules. Testa are performed with 'unittesting' library of python.
 
