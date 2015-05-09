@@ -3,9 +3,9 @@ from aelib.datastructure import datastruct
 
 def naming(array_strings):
     """
-    Naming process: assign to each characters in the strings
+    Naming process: assign to each characters appearing in the strings
     an integer (rank) in the range {0,..., sigma-1}
-    where sigma is the size of the alphabet.
+    where sigma is the total size of the alphabet.
 
     :rtype : Dictionary
     :param array_strings:  array of strings to be named

@@ -56,5 +56,3 @@ def RandSelect( S , k ):
 
     r = S[random.randint( 0, len(S)-1 ) # select a random element
 """
-
-def

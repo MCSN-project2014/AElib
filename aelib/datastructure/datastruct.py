@@ -1,57 +1,47 @@
 
 
-# imprt utils is at the bottom of the file because ther is a loop in the importing
 
 __author__ = 'dido-ubuntu'
 
 ############################################################################################################
-####################################### TRIE DATA STRUCTURE ################################
+####################################### TRIE data structure     ################################
 ############################################################################################################
 
 
 class Trie():
     """
-    Represent a Trie.
-    Each node is iplemented as a sigma-sized array, one enetry per posssible alphabet character.
+    Represent a compacted Trie.
+    Each node is implemented as a sigma-sized array [the alphabet size]
 
-    Strings are stored in the leaves of the trie, hence we have n leaves.
-
-    dictStringInt: is the dictionary containing the map between char and integer
-    build with the naming procedure.
-
+    Strings are stored in the leaves of the trie so we have n leaves as strings inserted..
     """
-    def __init__(self, sigma):
-        self.sigma = sigma
-        self.root = TrieNode(sigma)
 
-    def insert(self, newString):
-        self.dictNaming = utils.naming([newString])
+    def __init__(self, sigma, dictnaming):
+        self.sigma = sigma  # alphabet is eqaul to the number of different key in the dictionary
+        self.root = TrieNode(self.sigma)
+        self.dict_naming = dictnaming
+
+    def insert(self, string):
         tempNode = self.root
         msdigit = 0
-        self._insertRic(tempNode, newString, msdigit)
+        self._insertRic(tempNode, string, msdigit)
 
-    def _insertRic(self, node, newString, msdigit):
-
-        iDigitStr = self.dictNaming[newString[msdigit]] # number associated with n-th most significant digit
+    def _insertRic(self, node, string, msdigit):
+        iDigitStr = self.dict_naming[string[msdigit]]  #n-th most significant digit associated to the char
         item = node.array[iDigitStr]
-        if isinstance(item , None):
+        if item is None :
             # insert the string because there is no other string
-            node.array[iDigitStr] = newString
-            return
+            node.array[iDigitStr] = string
         elif isinstance(item, str):
             # collision
             oldString = item
-            newNode = TrieNode()
+            newNode = TrieNode(self.sigma)
             node.array[iDigitStr] = newNode
-            msdigit = msdigit + 1
-            self._updateLevel(newNode, newString, msdigit, oldString)
-
+            msdigit += 1
+            self._updateLevel(newNode, string, msdigit, oldString)
         elif isinstance(item, TrieNode):
-            #ricorsion in the childnode = item
             msdigit = msdigit + 1
-            #if(len(newString) <= levelChar):
-            self._insertRic(item, newString, msdigit)
-            #else:
+            self._insertRic(item, string, msdigit)
 
     def _updateLevel(self, node, newString, msdigit, oldString):
         """
@@ -60,7 +50,7 @@ class Trie():
         self._insertRic(node, newString, msdigit)
         self._insertRic(node, oldString, msdigit)
 
-"""
+    """
     def __str__(self):
         if self.root == [None for i in xrange(self.sigma)]:return '<empty tree>'
         def recurse(node):
@@ -90,23 +80,32 @@ class Trie():
             return lines, pos, width
         return '\n'.join(recurse(self.root) [0])
 
-"""
-
-
-
+    """
+    def __str__(self):
+        if self.root == [None for i in range(self.sigma)]:
+            return '<empty TRIE>'
+        def recurse(node, strNode):
+            for item in node.array:
+                if isinstance(item, str):
+                    strNode = strNode + " " + item
+                elif isinstance(item, TrieNode):
+                    strNode += recurse(item, strNode)
+                elif item is None:
+                    pass
+            return strNode
+        return recurse(self.root, " ")
 
 class TrieNode():
     """
     Represent a single Node in the trie.
-    Each has a sigma-sized array .
+    Each has a sigma-sized array.
     The leaves store the strings.
     """
 
     def __init__(self, sigma):
         self.sigma = sigma
-        self.array = [ [None] for i in xrange(sigma)] # array[i] = [None] or Pointer to another TrieNode or String
-        self.parent = NoneTrie.insert("abc")
-
+        self.array = [None for i in range(self.sigma)] # array[i] = [None] or Pointer to another TrieNode or String
+        self.parent = None
 
 ############################################################################################################
 ####################################### BINARY SEARCH TREEE  DATA STRUCTURE ################################
@@ -267,6 +266,4 @@ def test(args=None, BSTtype=BST):
     print(tree)
     print(tree.inOrderVisit())
 
-#if __name__ == '__main__': test()
 
-import utils   ## because utils import datastruct, there is a cycle
