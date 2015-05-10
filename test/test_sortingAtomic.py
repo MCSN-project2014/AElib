@@ -3,16 +3,19 @@ import random
 
 import aelib.sortingatomic.distr_based as dtrBased
 import aelib.sortingatomic.merge_based as mrgBased
+import aelib.sortingstrings.radixsort as rdxsort
 
 
 class TestSortingAtomic(unittest.TestCase):
 
     def setUp(self):
         self.reverse_array = [9, 8, 7, 6, 5, 4, 3, 2, 1, 0]
+        self.arrayStrings = ["zzz", "zaz", "bbb", "bab", "cac", "ccc", "dav", "ddc"]
         self.random_array = [random.randint(1, 10) for i in range(10)]
 
     def tearDown(self):
         self.reverse_array = [9, 8, 7, 6, 5, 4, 3, 2, 1, 0]
+        self.arrayStrings = ["zzz", "zaz", "bbb", "bab", "cac", "ccc", "dav", "ddc"]
         self.random_array = [random.randint(1, 10) for i in range(10)]
 
     def test_quickSort(self):
@@ -26,6 +29,10 @@ class TestSortingAtomic(unittest.TestCase):
         sorted_rand_array = mrgBased.mergesort(self.random_array)
         self.assertEqual(sorted_rev_array, sorted(self.reverse_array))
         self.assertEqual(sorted_rand_array, sorted(self.random_array))
+
+    def test_trie(self):
+        msdsorted = rdxsort.msd_first(self.arrayStrings)
+        self.assertEqual(msdsorted, sorted(self.arrayStrings))
 
     """
     def test_snowPlow(self):

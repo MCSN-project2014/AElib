@@ -18,5 +18,4 @@ class TestTrie(unittest.TestCase):
         trie = datastruct.Trie(10, dict_naming)
         for string in self.array_strings:
             trie.insert(string)
-
-        print(trie.visitInOrder())
+        self.assertEqual(trie.visitInOrder(), sorted(self.array_strings))

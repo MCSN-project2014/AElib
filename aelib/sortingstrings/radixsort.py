@@ -3,6 +3,7 @@ __author__ = 'dido-ubuntu'
 
 
 import aelib.utils as utils
+import aelib.datastructure.datastruct as datastruct
 
 def msd_first(listStrings):
     """
@@ -14,9 +15,13 @@ def msd_first(listStrings):
     """
 
     dictNaming = utils.naming(listStrings) #dictionary {'char':rank } #takes O(N log(sigma))) N=n*L  L=length single string
-    numbuckets = len(dictNaming) # number of distinct character in the strings
+    sigma = len(dictNaming) # number of distinct character in the strings
 
+    trie = datastruct.Trie(sigma, dictNaming)
+    for string in listStrings:
+        trie.insert(string)
 
+    return trie.visitInOrder()
 
 def lsd_first(listStrings):
     """
