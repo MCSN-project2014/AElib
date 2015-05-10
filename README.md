@@ -1,12 +1,13 @@
 # Algorithm Engeneering Library  [aelib]
 ## a.s 2014-2015
 
-Libraries written in python from the note of the Algorithm engeneering course.
+The libraries require `Python 3.4.0`
 
-`aelib` directory contains the packages corresponding to a chapter of the notes of the professor.
-In each pachage there are several modules, each of them contains algorithms implementaion.
+Libraries written in Python from the note of the Algorithm engeneering course.
+* `aelib` This directory contains the packages. Every package correspons to a chapter of the notes of the professor.
+In each pachage there are several modules, each of them contains serveral algorithms implementaion.
 
-`doc` folder contains the documentation of the libraries
+* `doc` this folder will contains the documentation of the libraries.
 
-`test` folder contains the test for each modules. Testa are performed with 'unittesting' library of python.
+* `test` this folder contains tests for each modules. Tests are performed withPython. `unittesting`.
 
