@@ -81,6 +81,20 @@ class Trie():
         return '\n'.join(recurse(self.root) [0])
 
     """
+    def visitInOrder(self):
+        if self.root == [None for i in range(self.sigma)]:
+            return []
+        def recVisit(node, list):
+            for item in node.array:
+                if isinstance(item, str):
+                    list.append(item)
+                elif isinstance(item, TrieNode):
+                    recVisit(item, list)
+                elif item is None:
+                    pass
+            return list
+        return recVisit(self.root, [])
+
     def __str__(self):
         if self.root == [None for i in range(self.sigma)]:
             return '<empty TRIE>'
