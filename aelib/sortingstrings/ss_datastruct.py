@@ -101,7 +101,92 @@ class TrieNodeArray():
         self.array = [None for i in range(self.sigma)]  # array[i] = [None] or Pointer to another TrieNode or String
         self.parent = None
 
+#####################################################
+##################  TRIE with hash chaining #########
+#####################################################
 
+
+class TrieNodeHash():
+
+    def __init__(self):
+        pass
+
+
+#####################################################
+##################  Binary Search tree ##############
+#####################################################
+
+class BinarySearchTree():
+
+    def __init__(self):
+        self.root = None
+
+    def insert(self, valueChild):
+        if self.root is None:
+            self.root = BinaryNode(valueChild)
+            return  True
+        else:
+            self.root.insert(valueChild)
+
+    def find(self, data):
+        if self.root:
+            return self.root.find(data)
+        else:
+            return False
+
+    def inorderVisit(self):
+        print("Inorder visit:")
+        self.root.inorder()
+
+
+
+
+class BinaryNode():
+
+    def __init__(self, value, rigthChild=None, leftChild=None):
+        self.value = value
+        self.rigth_child = rigthChild
+        self.left_child = leftChild
+
+
+    def insert(self, data):
+        if self.value == data:
+            return False
+        elif data < self.value:
+            if self.left_child:
+                return self.left_child.insert(data)
+            else:
+                self.left_child = BinaryNode(data)
+                return True
+        else:
+            if self.rigth_child:
+                return self.rigth_child.insert(data)
+            else:
+                self.rigth_child = BinaryNode(data)
+                return True
+
+    def find(self, data):
+        if self.value == data:
+            return True
+        elif data < self.value:
+            if self.left_child:
+                return self.left_child.find(data)
+            else:
+                return False
+        else:
+            if self.rigth_child:
+                return self.rigth_child.find(data)
+            else:
+                return False
+
+    def inorder(self):
+
+        if self:
+            if self.left_child:
+                self.left_child.inorder()
+            print(str(self.value))
+            if self.rigth_child:
+                self.rigth_child.inorder()
 
 ###################################################
 ######################### Couting sort ###############
@@ -118,12 +203,20 @@ def countingSort(array, k):
     sorted = [None for i in range(len(array))]
     for j in range(0, len(array)):
         c[array[j]-1] += 1
-    print(c)
     for i in range(1, k):
         c[i] += c[i-1]
-    print(c)
     for j in range(len(array)-1, -1, -1):
         pos = c[array[j]-1]
         sorted[pos-1]= array[j]
         c[array[j]-1] -= 1
     return sorted
+
+
+b = BinarySearchTree()
+b.insert(1)
+b.insert(5)
+b.insert(4)
+b.insert(6)
+print(b.find(6))
+print(b.find(0))
+b.inorderVisit()

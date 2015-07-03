@@ -6,7 +6,7 @@ from test.test_sortingAtomic import TestSortingAtomic
 from test.test_datastructures import TestTrie
 from test.test_prefixsearch import TestPrefixSearch
 from test.test_randomsampling import TestRandomSampling
-
+from test.test_sortingStrings import TestSortingStrings
 if __name__ == '__main__':
 
     suite = unittest.TestLoader().loadTestsFromTestCase(TestSortingStrings)
