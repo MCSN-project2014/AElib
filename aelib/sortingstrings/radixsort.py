@@ -3,21 +3,21 @@ __author__ = 'dido-ubuntu'
 
 
 import aelib.utils as utils
-import aelib.datastructure.datastruct as datastruct
+import aelib.sortingstrings.ss_datastruct as sortStringsStruct
 
 def msd_first(listStrings):
     """
     Most Significant Digit algorithms.
-     Process strings char-by-char from their beginning
+    Process strings char-by-char from their beginning
     and  distributes them into sigma (size of alphabet) buckets.
-    :param listStrings:
+    :param listStrings: a list of strings.
     :return:
     """
 
-    dictNaming = utils.naming(listStrings) #dictionary {'char':rank } #takes O(N log(sigma))) N=n*L  L=length single string
-    sigma = len(dictNaming) # number of distinct character in the strings
+    dictNaming = utils.naming(listStrings)      #dictionary {'char':rank } #takes O(N log(sigma))) N=n*L  L=length single string
+    sigma = len(dictNaming)                     # number of distinct character in the strings
 
-    trie = datastruct.Trie(sigma, dictNaming)
+    trie = sortStringsStruct.TrieArray(sigma, dictNaming)
     for string in listStrings:
         trie.insert(string)
 

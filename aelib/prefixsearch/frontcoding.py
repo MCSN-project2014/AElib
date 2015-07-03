@@ -21,6 +21,30 @@ def front_coding(dictStrings):
                 fcoded.append((l, 0))
     return fcoded
 
+def front_decoding(arrayTuples):
+    """
+
+    :param arrayTuples:  array of tuples coded with fron coding = [ (l,s),(l1;s'1)...]
+    :return:  dictionary of decoded strings in alphabetic order { 0: "first", 1:"second"}
+    """
+    dictdecoded= {}
+    prevstring = ""
+    i = 0
+    for l, codstr in arrayTuples:
+        if l > 0:
+            firststring = prevstring[:l]
+            decodestring =  firststring + codstr
+            dictdecoded[i] = decodestring
+            prevstring = decodestring
+            i += 1
+        else:
+            dictdecoded[i] = codstr
+            prevstring = codstr
+            i +=1
+    return dictdecoded
+
+
+
 
 def _compress(prev_string, string):
 

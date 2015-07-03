@@ -1,5 +1,7 @@
-from aelib.datastructure import datastruct
 
+__author__ = 'dido-ubuntu'
+
+from aelib.datastructure import datastruct
 
 def naming(array_strings):
     """
@@ -28,4 +30,12 @@ def naming(array_strings):
 
     return dict_naming
 
-__author__ = 'dido-ubuntu'
+
+def swap(sequence, i, j):
+    temp = sequence[i]
+    sequence[i] = sequence[j]
+    sequence[j] = temp
+    return sequence
+
+
+

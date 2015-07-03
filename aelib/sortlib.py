@@ -9,33 +9,6 @@
 
 #!/usr/bin/python
 import random
-class bintree(object):          ###structure for binary tree formulation
-    "Binary Tree Container"
-    def __init__(self):
-        self.val=None
-        self.left=None
-        self.right=None
-
-    def insert(self,val):
-        "Insert node in tree"
-        if self.val==None:
-            self.val=val
-            self.left=bintree()
-            self.right=bintree()
-        else:
-            if val<self.val:
-                self.left.insert(val)
-            else:
-                self.right.insert(val)
-        return
-
-    def inorder(self):
-        "Inoder traversal of tree"
-        if self.val==None:
-            return
-        self.left.inorder()
-        print(self.val, end=' ')
-        self.right.inorder()
 
 def insertion(ar):
     "Insertion sort"
@@ -307,6 +280,8 @@ def strandsort(ar):
             del sortedBins[lowBin]
     print(sorted)
     return sorted
+
+
 
 
 if __name__=='__main__':                                            #Driver Code

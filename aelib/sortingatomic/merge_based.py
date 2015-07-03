@@ -47,16 +47,42 @@ def merge(left, right):
     return res
 
 class SnowPlow():
+    """
+    Snow plow technique.
+    """
 
     def __init__(self, s=[], sizeM=2):
         self.sizeM = sizeM
         self.s = s
+
+    def createRuns(self):
         u = []
-        self.outRuns = []
         for i in range(self.sizeM):
-            u.append(s.pop(0))
-        self._snowPlowPhase(u)
-        print((self._merge(self.outRuns[0], self.outRuns[1])))
+            u.append(self.s.pop(0))
+        outRuns = []
+        self._snowPlowPhase(u, outRuns)
+        return outRuns
+
+    def _snowPlowPhase(self, u, outRuns):
+        run = []
+        h = list(u)             # copy the item of u in h
+        heapq.heapify(h)        # h as min-heap
+
+        u = []
+        while len(h) > 0:
+            min = heapq.heappop(h)
+            run.append(min)
+            if len(self.s) > 0:
+                next = self.s.pop(0)         # next element in the sequence
+                if next < min:
+                    u.append(next)
+                else:
+                    heapq.heappush(h, next)
+        outRuns.append(run)
+        if len(u) < self.sizeM:
+            self._snowPlowPhase(u, outRuns)
+        elif len(u) == self.sizeM:
+            return outRuns
 
     def _merge(self, a, b):
         """
@@ -73,31 +99,8 @@ class SnowPlow():
                 elif a[x] < b[y]:
                     aux.append(a[x])
                     x += 1
-                if y > k:  # pinter y is at the end of the sequence
+                if y > k:  # prints y is at the end of the sequence
                     aux.append(a[x])
                     x += 1
         return aux
-
-
-    #@staticmethod
-    def _snowPlowPhase(self, u):
-        run = []
-        h = u
-        heapq.heapify(h)           # u as min-heap
-        u = []
-        while len(h) > 0:
-            min = heapq.heappop(h)
-            run.append(min)
-            if len(self.s) > 0:
-                next = self.s.pop(0)         # next element in the sequence
-                if next < min :
-                    u.append(next)
-                else:
-                    heapq.heappush(h, next)
-        self.outRuns.append(run)
-
-        if len(u) != 0:
-            self._snowPlowPhase(u)
-
-
 

@@ -34,16 +34,19 @@ class TestSortingAtomic(unittest.TestCase):
         msdsorted = rdxsort.msd_first(self.arrayStrings)
         self.assertEqual(msdsorted, sorted(self.arrayStrings))
 
-    """
+
     def test_snowPlow(self):
-        s = [2,5,4,7,1,4,2]
-        for i in range(sizeM):
-            u.append(s.pop(0))
-        snowPlowPhase(u)
-        self.assertEqual(mergeSort(A),[1,2,3,5,7,9])
-        self.assertEqual()
+        s = [5, 1, 3, 6, 2, 4, 10, 0]
+        snowplow = mrgBased.SnowPlow(s, 3)
+        sorted_runs = snowplow.createRuns()
+        self.assertEqual(sorted_runs[0],[1,3,5,6,10])
 
+    def test_randomSelect(self):
+        s  = [1, 3, 5, 1, 2, 3, 7, 8, 6, 8, 0, 4, 10, 9] # 14 numbers [ 0,1,1,2,3,3,  4,5,6,7,8,8,9,10]
+        kitem = dtrBased.randSelect(s, 5)  # k = n/2 median of the entire sequence
+        self.assertEqual(kitem,3)
 
+    """
     def test_threePartition(self):
         s  =[9,8,7,6,5,4,3,2,1]
         #s = [1,2,3,4,5,6,7,9]
